@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, where, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import ItemCard from "../components/ItemCard";
-import { Link } from "react-router-dom";
 
 function FoundItems() {
   const [items, setItems] = useState([]);
@@ -11,8 +10,7 @@ function FoundItems() {
   useEffect(() => {
     const q = query(
       collection(db, "items"),
-      where("status", "==", "found"),
-      orderBy("createdAt", "desc")
+      where("status", "==", "found")
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -20,7 +18,6 @@ function FoundItems() {
         id: doc.id,
         ...doc.data(),
       }));
-
       setItems(data);
       setLoading(false);
     });
@@ -30,21 +27,12 @@ function FoundItems() {
 
   return (
     <div className="container">
-      <div className="page-header">
-        <h1>Found Items</h1>
-        <p className="subtitle">Items found and reported on campus</p>
-      </div>
+      <h1>Found Items</h1>
 
       {loading ? (
-        <p className="empty">Loading found items...</p>
+        <p>Loading...</p>
       ) : items.length === 0 ? (
-        <div className="empty-state">
-          <p>🎉 No found items yet</p>
-          <span>Be the first to report a found item</span>
-          <Link to="/post" className="empty-cta">
-            Report a found item
-          </Link>
-        </div>
+        <p>No found items</p>
       ) : (
         <div className="grid">
           {items.map((item) => (

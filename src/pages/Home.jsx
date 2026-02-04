@@ -13,14 +13,16 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "items"), orderBy("createdAt", "desc"));
+    const q = query(
+      collection(db, "items"),
+      orderBy("createdAt", "desc") // OK here
+    );
 
     const unsub = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
       setItems(data);
       setLoading(false);
     });
@@ -42,18 +44,10 @@ function Home() {
 
   return (
     <div className="home">
-      {/* HEADER */}
-      <div className="home-header">
-        <h1>Campus Lost & Found</h1>
-        <p className="subtitle">
-          Report lost items or help return found ones
-        </p>
-      </div>
+      <h1>Campus Lost & Found</h1>
 
-      {/* FILTER BAR */}
       <div className="filters">
         <input
-          type="text"
           placeholder="Search items..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -68,36 +62,17 @@ function Home() {
         </select>
 
         <div className="status-toggle">
-          <button
-            className={status === "all" ? "active" : ""}
-            onClick={() => setStatus("all")}
-          >
-            All
-          </button>
-          <button
-            className={status === "lost" ? "active lost" : ""}
-            onClick={() => setStatus("lost")}
-          >
-            Lost
-          </button>
-          <button
-            className={status === "found" ? "active found" : ""}
-            onClick={() => setStatus("found")}
-          >
-            Found
-          </button>
+          <button onClick={() => setStatus("all")}>All</button>
+          <button onClick={() => setStatus("lost")}>Lost</button>
+          <button onClick={() => setStatus("found")}>Found</button>
         </div>
       </div>
 
-      {/* CONTENT */}
       <div className="grid">
         {loading ? (
-          <p className="empty">Loading items...</p>
+          <p>Loading...</p>
         ) : filteredItems.length === 0 ? (
-          <div className="empty-state">
-            <p>🕵️‍♂️ No items found</p>
-            <span>Try adjusting filters or post a new item</span>
-          </div>
+          <p>No items found</p>
         ) : (
           filteredItems.map((item) => (
             <ItemCard key={item.id} item={item} />
@@ -105,10 +80,7 @@ function Home() {
         )}
       </div>
 
-      {/* FLOATING CTA */}
-      <Link to="/post" className="fab">
-        ➕ Post Item
-      </Link>
+      <Link to="/post" className="fab">➕ Post Item</Link>
     </div>
   );
 }
