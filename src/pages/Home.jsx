@@ -15,7 +15,7 @@ function Home() {
   useEffect(() => {
     const q = query(
       collection(db, "items"),
-      orderBy("createdAt", "desc") // OK here
+      orderBy("createdAt", "desc") 
     );
 
     const unsub = onSnapshot(q, (snapshot) => {
@@ -44,7 +44,23 @@ function Home() {
 
   return (
     <div className="home">
-      <h1>Campus Lost & Found</h1>
+      {/* HERO / TITLE SECTION */}
+      <div className="home-header">
+        <div className="home-title">
+          <h1>Campus Lost & Found</h1>
+          <p className="subtitle">
+            Report any lost or found item across campus
+          </p>
+        </div>
+
+        <div className="home-actions">
+          <Link to="/post" className="report-btn">
+            + Report an Item
+          </Link>
+        </div>
+      </div>
+
+
 
       <div className="filters">
         <input
