@@ -2,16 +2,31 @@ import { Link } from "react-router-dom";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
+import electronicsImg from "../assets/electronics.png";
+import accessoriesImg from "../assets/accessories.png";
+import documentsImg from "../assets/documents.png";
+import keysImg from "../assets/keys.png";
+import defaultImg from "../assets/default.png";
+
+const categoryImages = {
+  Electronics: electronicsImg,
+  Accessories: accessoriesImg,
+  Documents: documentsImg,
+  Keys: keysImg
+};
+
 function ItemCard({ item }) {
   if (!item) return null;
 
   const {
     id,
     name = "Unnamed Item",
-    image,
+    category,
     location = "Unknown location",
-    status = "lost",
+    status = "lost"
   } = item;
+
+  const imageSrc = categoryImages[category] || defaultImg;
 
   const handleDelete = async (e) => {
     e.stopPropagation();
@@ -32,7 +47,7 @@ function ItemCard({ item }) {
       {/* IMAGE + STATUS */}
       <div className="item-image">
         <img
-          src={image || "/placeholder.png"}
+          src={imageSrc}
           alt={name}
           loading="lazy"
         />
@@ -46,6 +61,7 @@ function ItemCard({ item }) {
       <div className="item-body">
         <h3 title={name}>{name}</h3>
         <p className="location">📍 {location}</p>
+        <p className="category-tag">{category}</p>
       </div>
 
       {/* ACTIONS */}

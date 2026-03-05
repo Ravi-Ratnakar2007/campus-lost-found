@@ -12,8 +12,7 @@ function PostItem() {
     status: "lost",
     location: "",
     description: "",
-    contact: "",
-    image: ""
+    contact: ""
   });
 
   const handleChange = (e) => {
@@ -72,6 +71,7 @@ function PostItem() {
           <option value="Electronics">Electronics</option>
           <option value="Documents">Documents</option>
           <option value="Accessories">Accessories</option>
+          <option value="Keys">Keys</option>
           <option value="Others">Others</option>
         </select>
 
@@ -96,13 +96,6 @@ function PostItem() {
           value={formData.contact}
           onChange={handleChange}
           required
-        />
-
-        <input
-          name="image"
-          placeholder="Image URL (temporary)"
-          value={formData.image}
-          onChange={handleChange}
         />
 
         <button type="submit">Post Item</button>
