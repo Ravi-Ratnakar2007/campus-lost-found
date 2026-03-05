@@ -3,12 +3,24 @@ import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
+import electronicsImg from "../assets/electronics.png";
+import accessoriesImg from "../assets/accessories.png";
+import documentsImg from "../assets/documents.png";
+import keysImg from "../assets/keys.png";
+import defaultImg from "../assets/default.png";
+
+const categoryImages = {
+  Electronics: electronicsImg,
+  Accessories: accessoriesImg,
+  Documents: documentsImg,
+  Keys: keysImg
+};
+
 function ItemDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -19,11 +31,10 @@ function ItemDetails() {
         if (docSnap.exists()) {
           setItem({ id: docSnap.id, ...docSnap.data() });
         } else {
-          setError("Item not found");
+          setItem(null);
         }
-      } catch (err) {
-        console.error("Error fetching item:", err);
-        setError("Failed to load item");
+      } catch (error) {
+        console.error("Error fetching item:", error);
       } finally {
         setLoading(false);
       }
@@ -33,22 +44,14 @@ function ItemDetails() {
   }, [id]);
 
   if (loading) {
-    return <div className="center">Loading item...</div>;
+    return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
   }
 
-  if (error) {
-    return <div className="center">{error}</div>;
+  if (!item) {
+    return <h2 style={{ textAlign: "center" }}>Item not found</h2>;
   }
 
-  const {
-    name = "Unnamed Item",
-    image,
-    status = "lost",
-    category = "Unknown",
-    location = "Unknown",
-    description = "No description provided",
-    contact = "Not provided",
-  } = item || {};
+  const imageSrc = categoryImages[item.category] || defaultImg;
 
   return (
     <div className="container">
@@ -57,23 +60,24 @@ function ItemDetails() {
       </button>
 
       <div className="details-card">
-        <img
-          src={image || "/placeholder.png"}
-          alt={name}
-          className="details-image"
-        />
+        <div className="details-image">
+          <img src={imageSrc} alt={item.name} />
+        </div>
 
         <div className="details-content">
-          <h1>{name}</h1>
+          <h1>{item.name}</h1>
 
-          <span className={`status-badge ${status}`}>
-            {status === "lost" ? "LOST" : "FOUND"}
-          </span>
+          <p>
+            <strong>Status:</strong>{" "}
+            <span className={item.status === "lost" ? "lost-text" : "found-text"}>
+              {item.status?.toUpperCase()}
+            </span>
+          </p>
 
-          <p><strong>Category:</strong> {category}</p>
-          <p><strong>Location:</strong> {location}</p>
-          <p><strong>Description:</strong> {description}</p>
-          <p><strong>Contact:</strong> {contact}</p>
+          <p><strong>Category:</strong> {item.category}</p>
+          <p><strong>Location:</strong> {item.location}</p>
+          <p><strong>Description:</strong> {item.description}</p>
+          <p><strong>Contact:</strong> {item.contact}</p>
         </div>
       </div>
     </div>
