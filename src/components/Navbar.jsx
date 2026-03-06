@@ -4,17 +4,18 @@ import "./Navbar.css";
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="navbar-left">
-        <Link to="/" className="logo">
-          Campus L&F
-        </Link>
+      <div className="nav-left">
+        <Link to="/" className="logo">Campus L&F</Link>
       </div>
 
-      <div className="navbar-center">
+      <div className="nav-links">
         <Link to="/">Home</Link>
         <Link to="/lost">Lost</Link>
         <Link to="/found">Found</Link>
-        <Link to="/post" className="post-btn">
+      </div>
+
+      <div className="nav-right">
+        <Link to="/post" className="post-nav-btn">
           + Post Item
         </Link>
       </div>

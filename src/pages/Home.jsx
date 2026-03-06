@@ -46,18 +46,16 @@ function Home() {
     <div className="home">
       {/* HERO / TITLE SECTION */}
       <div className="home-header">
-        <div className="home-title">
+        <div className="title-area">
           <h1>Campus Lost & Found</h1>
           <p className="subtitle">
             Report any lost or found item across campus
           </p>
         </div>
 
-        <div className="home-actions">
-          <Link to="/post" className="report-btn">
-            + Report an Item
-          </Link>
-        </div>
+        <Link to="/post" className="report-btn">
+          + Report Item
+        </Link>
       </div>
 
 

@@ -1,38 +1,43 @@
 .navbar {
-  height: 64px;
   background: #1f2937;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 12px 24px;
+  flex-wrap: wrap;
 }
 
 .logo {
-  font-size: 18px;
   font-weight: 600;
   color: white;
   text-decoration: none;
+  font-size: 18px;
 }
 
-.navbar-center {
+.nav-links {
   display: flex;
-  gap: 20px;
+  gap: 18px;
 }
 
-.navbar-center a {
+.nav-links a {
   color: #d1d5db;
   text-decoration: none;
-  font-weight: 500;
 }
 
-.navbar-center a:hover {
+.nav-links a:hover {
   color: white;
 }
 
-.post-btn {
+.post-nav-btn {
   background: #2563eb;
   padding: 8px 14px;
   border-radius: 8px;
-  color: white !important;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.post-nav-btn:hover {
+  background: #1d4ed8;
 }
