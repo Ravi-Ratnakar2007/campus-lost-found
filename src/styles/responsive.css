@@ -1,4 +1,4 @@
-/* ===== GENERAL ===== */
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -8,7 +8,7 @@ body {
   padding: 16px;
 }
 
-/* ===== NAVBAR ===== */
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -25,14 +25,13 @@ body {
   font-size: 14px;
 }
 
-/* ===== GRID ===== */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
-/* ===== ITEM CARD ===== */
 .item-card {
   border: 1px solid #ddd;
   padding: 12px;
@@ -44,16 +43,12 @@ body {
   margin: 8px 0;
 }
 
-/* ===== EMPTY STATE ===== */
 .empty-state {
   text-align: center;
   padding: 40px 16px;
   color: #555;
 }
 
-/* ========================= */
-/* 📱 MOBILE DEVICES */
-/* ========================= */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;

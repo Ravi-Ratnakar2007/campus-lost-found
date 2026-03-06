@@ -9,7 +9,7 @@ export const createItem = ({
 }) => ({
   name,
   category,
-  status,       // "lost" | "found"
+  status,       
   location,
   description,
   imageUrl,
