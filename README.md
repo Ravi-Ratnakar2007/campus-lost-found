@@ -105,9 +105,9 @@ Roll no - 2025BCS-074
 
 # Future Improvements
 
-Image upload support using Firebase Storage
-User authentication
-Item claim request system
-Admin dashboard
-Advanced search and filters
-Email notifications for matches
+- Image upload support using Firebase Storage
+- User authentication
+- Item claim request system
+- Admin dashboard
+- Advanced search and filters
+- Email notifications for matches
